@@ -7,11 +7,12 @@ import os
 
 class GlogConan(ConanFile):
     name = "glog"
-    version = "0.3.5"
+    version = "0.4.0"
     url = "https://github.com/bincrafters/conan-glog"
-    homepage = "https://github.com/gflags/gflags"
+    homepage = "https://github.com/google/glog"
     description = "Google logging library"
-    license = "BSD 3-Clause"
+    license = "BSD-3-Clause"
+    topics = ("conan", "glog", "logging", "google", "log")
     author = "Bincrafters <bincrafters@gmail.com>"
     exports = ["LICENSE.md"]
     exports_sources = ["CMakeLists.txt"]
@@ -23,15 +24,15 @@ class GlogConan(ConanFile):
 
     def config_options(self):
         if self.settings.os == "Windows":
-            self.options.remove("fPIC")
+            del self.options.fPIC
 
     def requirements(self):
         if self.options.with_gflags:
-            self.requires("gflags/2.2.1@bincrafters/stable")
-        
+            self.requires("gflags/2.2.2@bincrafters/stable")
+
     def source(self):
-        source_url =  "https://github.com/google/{0}".format(self.name)
-        tools.get("{0}/archive/v{1}.tar.gz".format(source_url, self.version))
+        sha256 = "f28359aeba12f30d73d9e4711ef356dc842886968112162bc73002645139c39c"
+        tools.get("{0}/archive/v{1}.tar.gz".format(self.homepage, self.version), sha256=sha256)
         extracted_dir = self.name + "-" + self.version
         os.rename(extracted_dir, self._source_subfolder)
 
