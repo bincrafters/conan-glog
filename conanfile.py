@@ -29,7 +29,8 @@ class GlogConan(ConanFile):
             self.options["gflags"].nothreads = False
 
     def requirements(self):
-        self.requires("libunwind/1.3.1@bincrafters/stable")
+        if self.settings.os == "Linux":
+            self.requires("libunwind/1.3.1@bincrafters/stable")
         if self.options.with_gflags:
             self.requires("gflags/2.2.2@bincrafters/stable")
 
