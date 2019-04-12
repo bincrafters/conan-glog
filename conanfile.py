@@ -25,8 +25,11 @@ class GlogConan(ConanFile):
     def config_options(self):
         if self.settings.os == "Windows":
             del self.options.fPIC
+        if self.options.with_gflags:
+            self.options["gflags"].nothreads = False
 
     def requirements(self):
+        self.requires("libunwind/1.3.1@bincrafters/stable")
         if self.options.with_gflags:
             self.requires("gflags/2.2.2@bincrafters/stable")
 
@@ -56,4 +59,4 @@ class GlogConan(ConanFile):
     def package_info(self):
         self.cpp_info.libs = tools.collect_libs(self)
         if self.settings.os == "Linux":
-            self.cpp_info.libs.append('pthread')
+            self.cpp_info.libs.extend(['pthread', 'm'])
