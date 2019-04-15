@@ -1,4 +1,3 @@
-#!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
 from conans import ConanFile, CMake, tools
@@ -25,8 +24,6 @@ class GlogConan(ConanFile):
     def config_options(self):
         if self.settings.os == "Windows":
             del self.options.fPIC
-        if self.options.with_gflags:
-            self.options["gflags"].nothreads = False
 
     def requirements(self):
         if self.settings.os == "Linux":
