@@ -27,7 +27,7 @@ class GlogConan(ConanFile):
 
     def requirements(self):
         if self.options.with_gflags:
-            self.requires("gflags/2.2.1@bincrafters/stable")
+            self.requires("gflags/2.2.2@bincrafters/stable")
         
     def source(self):
         commit = "5c292672df04ab82a97be5116d47dc0cc544b39f"
